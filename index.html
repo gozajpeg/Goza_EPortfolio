@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rommel Angelo T. Goza — E‑Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0f1a;
+      --card:#0f1629cc;
+      --muted:#9aa4b2;
+      --text:#e6eaf2;
+      --accent:#7c5cff;
+      --accent-2:#15d1ff;
+      --ring:#2a3350;
+      --glass:rgba(255,255,255,0.06);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--text);
+      background:radial-gradient(1200px 800px at 10% -10%, #1b2340 0%, #0b0f1a 45%),
+                 radial-gradient(800px 600px at 110% 10%, #101d33 0%, #0b0f1a 50%),
+                 #0b0f1a;
+      overflow-x:hidden;
+    }
+    /* Animated gradient orbs */
+    .orbs{position:fixed; inset:0; z-index:-1; overflow:hidden;}
+    .orb{position:absolute; filter:blur(60px); opacity:.6; mix-blend-mode:screen; border-radius:50%;}
+    .o1{background:conic-gradient(from 0deg,#7c5cff,transparent 60%); width:600px; height:600px; left:-200px; top:-200px; animation:float1 18s ease-in-out infinite;}
+    .o2{background:radial-gradient(circle at 30% 30%, #15d1ff, transparent 60%); width:480px; height:480px; right:-120px; top:20vh; animation:float2 22s ease-in-out infinite;}
+    .o3{background:radial-gradient(circle at 70% 70%, #ff7ce5, transparent 60%); width:520px; height:520px; left:20vw; bottom:-200px; animation:float3 26s ease-in-out infinite;}
+    @keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(40px)}}
+    @keyframes float2{0%,100%{transform:translateY(0) translateX(0)}50%{transform:translateY(-30px) translateX(-20px)}}
+    @keyframes float3{0%,100%{transform:translateY(0)}50%{transform:translateY(-50px)}}
+
+    header{position:sticky; top:0; z-index:50; backdrop-filter:saturate(1.2) blur(10px); background:linear-gradient( to bottom, rgba(11,15,26,.8), rgba(11,15,26,.2)); border-bottom:1px solid var(--ring)}
+    .wrap{max-width:1100px; margin:0 auto; padding:0 20px}
+    nav{display:flex; align-items:center; justify-content:space-between; height:70px}
+    .brand{display:flex; gap:12px; align-items:center; font-weight:800; letter-spacing:.3px}
+    .brand .dot{width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg,var(--accent),var(--accent-2))}
+    .links a{color:var(--muted); text-decoration:none; margin-left:18px; font-weight:600}
+    .links a:hover{color:var(--text)}
+    .btn{appearance:none; border:none; cursor:pointer; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#0b0f1a; padding:10px 16px; font-weight:800; border-radius:12px; box-shadow:0 10px 24px rgba(124,92,255,.25)}
+
+    .hero{padding:90px 0 60px; display:grid; grid-template-columns:1.2fr .8fr; gap:36px; align-items:center}
+    .card{background:var(--card); border:1px solid var(--ring); border-radius:var(--radius); box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .hero .card{padding:28px}
+    .headline{font-size:42px; line-height:1.1; margin:0 0 12px; font-weight:800}
+    .muted{color:var(--muted)}
+    .pill{display:inline-flex; gap:8px; align-items:center; background:var(--glass); border:1px solid var(--ring); padding:8px 12px; border-radius:999px; font-weight:600}
+
+    /* Sections */
+    section{padding:32px 0}
+    section h2{font-size:28px; margin:0 0 16px}
+    .grid{display:grid; gap:16px}
+    .two{grid-template-columns:1fr 1fr}
+    .three{grid-template-columns:repeat(3,1fr)}
+
+    /* About */
+    .about p{line-height:1.7}
+
+    /* Skills */
+    .skill{background:var(--glass); border:1px solid var(--ring); padding:14px; border-radius:14px}
+    .skill h4{margin:0 0 8px}
+    .bar{height:10px; background:#111726; border-radius:999px; overflow:hidden; border:1px solid var(--ring)}
+    .fill{height:100%; background:linear-gradient(90deg,var(--accent),var(--accent-2)); width:0%; transition:width 1.2s ease}
+
+    /* Projects */
+    .project{display:flex; gap:16px; background:var(--glass); border:1px solid var(--ring); border-radius:16px; overflow:hidden}
+    .project img{width:200px; height:140px; object-fit:cover}
+    .project .meta{padding:14px}
+    .chip{display:inline-block; padding:4px 8px; border-radius:999px; border:1px solid var(--ring); background:rgba(255,255,255,.04); font-size:12px; color:var(--muted); font-weight:700}
+
+    /* Education & Exp */
+    .timeline{border-left:2px dashed #203055; padding-left:18px}
+    .timeline .item{margin:12px 0}
+
+    /* Contact */
+    footer{margin-top:40px; padding:40px 0; border-top:1px solid var(--ring); background:linear-gradient(to top, rgba(11,15,26,.9), rgba(11,15,26,.4))}
+    form{display:grid; gap:12px}
+    input, textarea{width:100%; background:#0e1425; border:1px solid var(--ring); color:var(--text); padding:12px 14px; border-radius:12px; font:inherit}
+    input:focus, textarea:focus{outline:none; border-color:#3557ff; box-shadow:0 0 0 4px rgba(53,87,255,.15)}
+
+    /* Responsive */
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr; padding-top:60px}
+      .three{grid-template-columns:1fr}
+      .two{grid-template-columns:1fr}
+      nav .links{display:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="orbs" aria-hidden="true">
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+    <div class="orb o3"></div>
+  </div>
+
+  <header>
+    <div class="wrap">
+      <nav>
+        <div class="brand"><span class="dot"></span> Rommel Angelo Goza</div>
+        <div class="links">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#education">Course</a>
+          <a href="#experience">Experience</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <a class="btn" href="mailto:rgoza43@gmail.com">Email Me</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="card">
+        <div class="pill">👋 Hi, I'm</div>
+        <h1 class="headline">Rommel Angelo T. Goza</h1>
+        <p class="muted" style="margin:0 0 14px">Age: 22 • Email: <a href="mailto:rgoza43@gmail.com" style="color:inherit">rgoza43@gmail.com</a></p>
+        <p style="font-size:18px; line-height:1.7; margin-top:10px">I build mobile apps, backend services, and game prototypes. I love turning ideas into clean, working software and learning new tech along the way.</p>
+        <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap">
+          <a class="btn" href="#projects">See Projects</a>
+          <a class="btn" style="background:#0e1425; color:var(--text); box-shadow:none; border:1px solid var(--ring)" href="#contact">Contact Me</a>
+        </div>
+      </div>
+      <div class="card" style="display:grid; place-items:center; padding:0; overflow:hidden">
+        <!-- Replace with your real photo -->
+        <img src="./goza.png" alt="Rommel Angelo T. Goza" style="width:100%; height:100%; object-fit:cover">
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="about">
+      <h2>About Me</h2>
+      <div class="card" style="padding:18px">
+        <p>I'm a developer who loves coding—especially when it solves real problems. I enjoy the full stack: crafting smooth mobile experiences, building robust backends, and experimenting with game mechanics to sharpen my creativity. I learn fast, I ship fast, and I’m always curious about the next tool or technique that can make a product better.</p>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="grid two">
+        <div class="skill">
+          <h4>Mobile Developer <span class="muted">— Excellent</span></h4>
+          <div class="bar"><div class="fill" style="width:95%"></div></div>
+        </div>
+        <div class="skill">
+          <h4>Game Developer <span class="muted">— Moderate</span></h4>
+          <div class="bar"><div class="fill" style="width:60%"></div></div>
+        </div>
+        <div class="skill">
+          <h4>Backend Developer <span class="muted">— Excellent</span></h4>
+          <div class="bar"><div class="fill" style="width:92%"></div></div>
+        </div>
+        <div class="skill">
+          <h4>Video Editor <span class="muted">— Moderate</span></h4>
+          <div class="bar"><div class="fill" style="width:65%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="grid">
+        <article class="project">
+          <img src="./spinner.jpg" alt="Madspinner robot placeholder" style = "width: 200px; height: 200px; object-fit:cover;">
+          <div class="meta">
+            <div style="display:flex; justify-content:space-between; align-items:center">
+              <h3 style="margin:0">Madspinner: Arduino-Based Robot with Bamboo Spinner</h3>
+              <span class="chip">Role: Developer</span>
+            </div>
+            <p class="muted" style="margin:8px 0 0">A hardware‑software project using Arduino to drive a spinning bamboo mechanism with precise motor control and safety features.</p>
+          </div>
+        </article>
+
+        <article class="project">
+          <img src="./arhkila.png" alt="ARHKILA capstone placeholder" style = "width: 200px; height: 200px; object-fit:cover;">
+          <div class="meta">
+            <div style="display:flex; justify-content:space-between; align-items:center">
+              <h3 style="margin:0">ARHKILA: A Capstone Project</h3>
+              <span class="chip">Role: Developer</span>
+            </div>
+            <p class="muted" style="margin:8px 0 0">Capstone focused on building a functional application with clean architecture, modular code, and a strong emphasis on user experience. </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education">
+      <h2>Course</h2>
+      <div class="card" style="padding:18px">
+        <div class="timeline">
+          <div class="item">
+            <h3 style="margin:0">Bachelor of Science in Information Technology</h3>
+            <p class="muted" style="margin:4px 0 0">2025 – 2026</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+      <h2>Experience</h2>
+      <div class="grid three">
+        <div class="card" style="padding:18px">
+          <h4 style="margin:0 0 6px">Willing to Learn More</h4>
+          <p class="muted" style="margin:0">Growth‑minded developer who constantly explores new stacks, patterns, and best practices. I pick things up fast and deliver.</p>
+        </div>
+        <div class="card" style="padding:18px">
+          <h4 style="margin:0 0 6px">Mobile + Backend Builds</h4>
+          <p class="muted" style="margin:0">Prototyped mobile apps with working APIs, authentication, and database integrations. Clean code, readable commits.</p>
+        </div>
+        <div class="card" style="padding:18px">
+          <h4 style="margin:0 0 6px">Team Collaboration</h4>
+          <p class="muted" style="margin:0">Comfortable with Git, code reviews, and agile sprints. Communicates clearly and documents decisions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <div class="grid two">
+        <div class="card" style="padding:18px">
+          <p class="muted" style="margin-top:0">Want to collaborate or hire me? Send a message below or email me directly.</p>
+          <form onsubmit="event.preventDefault(); window.location.href='mailto:rgoza43@gmail.com?subject=Inquiry%20from%20Portfolio&body='+encodeURIComponent(document.getElementById('msg').value)">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea id="msg" rows="5" placeholder="Your message..." required></textarea>
+            <button class="btn" type="submit">Send via Email</button>
+          </form>
+        </div>
+        <div class="card" style="padding:18px">
+          <h3 style="margin-top:0">Details</h3>
+          <ul style="list-style:none; padding:0; margin:0; display:grid; gap:10px">
+            <li>📧 <a href="mailto:rgoza43@gmail.com" style="color:inherit">rgoza43@gmail.com</a></li>
+            <li>👤 Age: 22</li>
+            <li>🌍 Philippines</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
+      <p class="muted" style="margin:0">© <span id="year"></span> Rommel Angelo T. Goza — E‑Portfolio</p>
+      <a class="btn" href="#top" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to Top</a>
+    </div>
+  </footer>
+
+  <script>
+    // Animate skill bars on scroll
+    const onScroll = () => {
+      document.querySelectorAll('.fill').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const inView = rect.top < window.innerHeight - 80;
+        if(inView) el.style.width = el.style.width; // width already set inline
+      });
+    };
+    window.addEventListener('load', onScroll);
+    window.addEventListener('scroll', onScroll);
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
